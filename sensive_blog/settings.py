@@ -10,6 +10,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ALLOWED_HOSTS = []
 
+INTERNAL_IPS = ['127.0.0.1']
+
 SECRET_KEY = os.getenv("SECRET_KEY", "REPLACE_ME")
 
 DEBUG = env.bool("DEBUG", True)
@@ -21,11 +23,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
 
     'blog',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -41,7 +45,9 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-STATIC_ROOT = ''
+
+#STATIC_ROOT = ''
+STATIC_URL = '/static/'
 
 TEMPLATES = [
     {
